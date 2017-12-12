@@ -124,13 +124,13 @@
         }
 
         //check what thumbitem has been clicked and move slider to that item
-        $(this._thumbcontent._thumbcontainer).on('click', this._thumbcontent._thumbcontainer.children(), $.proxy(function (e) {
+        $(this._thumbcontent._thumbcontainer).on('click', '.' + options.thumbItemClass, $.proxy(function (e) {
 
             // find relative slider
             this._identifier = $(e.target).closest('.' + options.thumbContainerClass).data('slider-id');
 
             // get index of clicked thumbnail
-            var index = $(e.target).parent().is(this._thumbcontent._thumbcontainer) ? $(e.target).index() : $(e.target).closest('.'+options.thumbItemClass).index();
+            var index = $(e.target).closest('.' + options.thumbContainerClass).is(this._thumbcontent._thumbcontainer) ? $(this._thumbcontent._thumbcontainer).find('.' + options.thumbItemClass).index(e.currentTarget) : $(e.target).closest('.'+options.thumbItemClass).index();
 
             if (options.thumbsPrerendered) {
                 // slide to slide :)
